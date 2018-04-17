@@ -21,10 +21,16 @@
             android:text="@string/welcome"
             android:textSize="20sp" />
 
-
-
+        <ListView
+            android:id="@+id/listView_main"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+        </ListView>
 
     </LinearLayout>
+
+
+
 
     <Button
         android:id="@+id/btnLogout"
