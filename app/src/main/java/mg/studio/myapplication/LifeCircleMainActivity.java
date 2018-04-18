@@ -14,10 +14,18 @@ public class LifeCircleMainActivity extends AppCompatActivity {
     private String previousContent;
     private String currentState = null;
 
+    private SessionManager session;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_lifecircle);
+
+       //Check wheather the user is logged. if not ,start the login activity
+        session = new SessionManager(getApplicationContext());
+        if (!session.isLoggedIn()) {
+            startActivity(new Intent(getApplicationContext(), Login.class));
+        }
+
 
         Log.d(TAG, "onCreate:" + TAG);
         currentState = "onCreate";

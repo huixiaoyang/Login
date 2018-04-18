@@ -1,6 +1,7 @@
 package mg.studio.myapplication;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -12,10 +13,17 @@ import android.widget.Toast;
 public class RadioButtonsClick extends Activity {
     RadioGroup radiogroup;
 
+    private SessionManager session;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_radio_buttons_click);
+
+        //Check wheather the user is logged. if not ,start the login activity
+        session = new SessionManager(getApplicationContext());
+        if (!session.isLoggedIn()) {
+            startActivity(new Intent(getApplicationContext(), Login.class));
+        }
 
         // Connect the radioGroup
         radiogroup = (RadioGroup) findViewById(R.id.radioGroup);

@@ -1,5 +1,6 @@
 package mg.studio.myapplication;
 
+import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -11,10 +12,17 @@ public class DataBaseActivity extends AppCompatActivity {
 
     private DatabaseHelper databaseHelper;
 
+    private SessionManager session;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_database);
+
+        //Check wheather the user is logged. if not ,start the login activity
+        session = new SessionManager(getApplicationContext());
+        if (!session.isLoggedIn()) {
+            startActivity(new Intent(getApplicationContext(), Login.class));
+        }
 
         databaseHelper = new DatabaseHelper(this);
     }

@@ -1,6 +1,7 @@
 package mg.studio.myapplication;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Environment;
 import android.support.v7.app.AppCompatActivity;
@@ -19,11 +20,19 @@ import java.util.Calendar;
 public class AppPrivateDirectory extends AppCompatActivity {
 
     private static final String LOG_TAG = MainActivity.class.getSimpleName();
-
+    private SessionManager session;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_app_private);
+
+        //Check wheather the user is logged. if not ,start the login activity
+        session = new SessionManager(getApplicationContext());
+        if (!session.isLoggedIn()) {
+            startActivity(new Intent(getApplicationContext(), Login.class));
+        }
+
+
         Calendar calendar = Calendar.getInstance();
         String timeStamp /* use as file name */ = String.valueOf(calendar.getTimeInMillis());
         String text_to_save = "Created on " + timeStamp;

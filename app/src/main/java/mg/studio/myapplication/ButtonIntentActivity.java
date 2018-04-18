@@ -8,10 +8,17 @@ import android.view.View;
 
 public class ButtonIntentActivity extends AppCompatActivity {
 
+    private SessionManager session;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_button_intent);
+
+        //Check wheather the user is logged. if not ,start the login activity
+        session = new SessionManager(getApplicationContext());
+        if (!session.isLoggedIn()) {
+            startActivity(new Intent(getApplicationContext(), Login.class));
+        }
     }
 
     public void btn(View view) {

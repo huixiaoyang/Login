@@ -20,10 +20,17 @@ public class ServiceDemo extends AppCompatActivity {
     Intent myIntent = null;
     private String TAG_SERVICE = "SERVICE_MainActivity";
 
+    private SessionManager session;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_service_demo);
+
+        //Check wheather the user is logged. if not ,start the login activity
+        session = new SessionManager(getApplicationContext());
+        if (!session.isLoggedIn()) {
+            startActivity(new Intent(getApplicationContext(), Login.class));
+        }
 
         editTextMsgToSend = findViewById(R.id.msgtosend);
         textViewCntReceived = findViewById(R.id.cntreceived);

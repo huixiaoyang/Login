@@ -1,5 +1,6 @@
 package mg.studio.myapplication;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.ListView;
@@ -14,10 +15,17 @@ public class ListViewCustomAdapter extends AppCompatActivity {
     //The arrayList to populate the listView
     private ArrayList<ListViewStudents> studentsList = new ArrayList<ListViewStudents>();
 
+    private SessionManager session;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.list_view_custom_adapter_main);
+
+        //Check wheather the user is logged. if not ,start the login activity
+        session = new SessionManager(getApplicationContext());
+        if (!session.isLoggedIn()) {
+            startActivity(new Intent(getApplicationContext(), Login.class));
+        }
 
         //Generate the dummy date to populate the listView
         generateDummyContent();

@@ -2,6 +2,7 @@ package mg.studio.myapplication;
 
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -17,6 +18,7 @@ public class ListViewActivity extends Activity {
 
     private String[] dummyData = {"Dragona", "Dragon", "Long"};
 
+    private SessionManager session;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -28,6 +30,12 @@ public class ListViewActivity extends Activity {
          */
 
         setContentView(R.layout.activity_listview_main);
+
+        //Check wheather the user is logged. if not ,start the login activity
+        session = new SessionManager(getApplicationContext());
+        if (!session.isLoggedIn()) {
+            startActivity(new Intent(getApplicationContext(), Login.class));
+        }
 
         /*
          * 4-Create an ArrayAdapter 'mAdapter' to display the dummy data

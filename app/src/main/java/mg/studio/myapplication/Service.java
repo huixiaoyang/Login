@@ -11,11 +11,17 @@ public class Service extends AppCompatActivity implements Runnable {
     Handler handler = new Handler();
     private int counterActivity = 0;
 
+    private SessionManager session;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_service);
 
+        //Check wheather the user is logged. if not ,start the login activity
+        session = new SessionManager(getApplicationContext());
+        if (!session.isLoggedIn()) {
+            startActivity(new Intent(getApplicationContext(), Login.class));
+        }
     }
 
     public void btnStart(View view) {

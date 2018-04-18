@@ -1,6 +1,7 @@
 package mg.studio.myapplication;
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -13,11 +14,17 @@ public class WebViewActivity extends AppCompatActivity {
     private ProgressDialog progressDialog;
     private WebView webView;
 
-
+    private SessionManager session;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_web_view);
+
+        //Check wheather the user is logged. if not ,start the login activity
+        session = new SessionManager(getApplicationContext());
+        if (!session.isLoggedIn()) {
+            startActivity(new Intent(getApplicationContext(), Login.class));
+        }
 
         //Hide nav bar and status bar
         hideSystemUI();

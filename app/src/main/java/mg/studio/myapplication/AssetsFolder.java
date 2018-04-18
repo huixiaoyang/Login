@@ -1,6 +1,7 @@
 package mg.studio.myapplication;
 
 import android.Manifest;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -26,11 +27,17 @@ public class AssetsFolder extends AppCompatActivity {
 
     private static final String TAG_LOG = MainActivity.class.getSimpleName();
     private static final int MY_PERMISSIONS_REQUEST_WRITE_LOCAL_STORAGE = 121;
-
+    private SessionManager session;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.assetsfolder);
+
+        //Check wheather the user is logged. if not ,start the login activity
+        session = new SessionManager(getApplicationContext());
+        if (!session.isLoggedIn()) {
+            startActivity(new Intent(getApplicationContext(), Login.class));
+        }
 
         accessAssetsOne();
         accessAssetsTwo("data.txt");

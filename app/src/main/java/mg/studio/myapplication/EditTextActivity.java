@@ -1,6 +1,7 @@
 package mg.studio.myapplication;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -10,10 +11,17 @@ import android.widget.Toast;
 
 public class EditTextActivity extends Activity {
 
+    private SessionManager session;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_text);
+
+        //Check wheather the user is logged. if not ,start the login activity
+        session = new SessionManager(getApplicationContext());
+        if (!session.isLoggedIn()) {
+            startActivity(new Intent(getApplicationContext(), Login.class));
+        }
 
         // Connect the buttons and the edit text with this java file
         Button btnClear = (Button) findViewById(R.id.btnClear);

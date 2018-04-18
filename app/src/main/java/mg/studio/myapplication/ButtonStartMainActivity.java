@@ -10,11 +10,17 @@ import android.widget.EditText;
 
 public class ButtonStartMainActivity extends Activity {
 
+    private SessionManager session;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_button_start_main);
 
+        //Check wheather the user is logged. if not ,start the login activity
+        session = new SessionManager(getApplicationContext());
+        if (!session.isLoggedIn()) {
+            startActivity(new Intent(getApplicationContext(), Login.class));
+        }
 
         final EditText userInput =findViewById(R.id.et_input);
         findViewById(R.id.btn).setOnClickListener(new OnClickListener() {
